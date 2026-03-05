@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\monitoring\metrics.py
+# hypothesis_version: 6.151.9
+
+[0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0, 20.0, 30.0, 60.0, 100, 200, 500, 'GET', 'Total cache hits', 'Total cache misses', 'api_name', 'applications', 'cache', 'cache_type', 'document_type', 'documents', 'duration', 'eligibility', 'endpoint', 'error', 'error_type', 'errors', 'method', 'model_name', 'note', 'profile_type', 'requests', 'scheme', 'schemes_matched', 'severity', 'standard', 'status', 'success']

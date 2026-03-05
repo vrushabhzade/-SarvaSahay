@@ -1,0 +1,51 @@
+Generic single-database configuration for SarvaSahay Platform.
+
+## Creating a new migration
+
+To create a new migration after modifying models:
+
+```bash
+alembic revision --autogenerate -m "Description of changes"
+```
+
+## Applying migrations
+
+To upgrade to the latest version:
+
+```bash
+alembic upgrade head
+```
+
+To upgrade to a specific revision:
+
+```bash
+alembic upgrade <revision_id>
+```
+
+## Rolling back migrations
+
+To downgrade one revision:
+
+```bash
+alembic downgrade -1
+```
+
+To downgrade to a specific revision:
+
+```bash
+alembic downgrade <revision_id>
+```
+
+## Viewing migration history
+
+To see current revision:
+
+```bash
+alembic current
+```
+
+To see migration history:
+
+```bash
+alembic history
+```

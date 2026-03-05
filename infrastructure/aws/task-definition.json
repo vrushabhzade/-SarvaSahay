@@ -1,0 +1,117 @@
+{
+  "family": "sarvasahay-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "sarvasahay-app",
+      "image": "YOUR_ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/sarvasahay-platform:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "APP_NAME",
+          "value": "SarvaSahay Platform"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "API_HOST",
+          "value": "0.0.0.0"
+        },
+        {
+          "name": "API_PORT",
+          "value": "8000"
+        },
+        {
+          "name": "AWS_DEFAULT_REGION",
+          "value": "ap-south-1"
+        },
+        {
+          "name": "AWS_S3_BUCKET_DOCUMENTS",
+          "value": "sarvasahay-documents"
+        },
+        {
+          "name": "AWS_S3_BUCKET_ML_MODELS",
+          "value": "sarvasahay-ml-models"
+        },
+        {
+          "name": "AWS_S3_BUCKET_BACKUPS",
+          "value": "sarvasahay-backups"
+        },
+        {
+          "name": "AWS_LAMBDA_ELIGIBILITY_FUNCTION",
+          "value": "sarvasahay-eligibility-engine"
+        },
+        {
+          "name": "AWS_LAMBDA_DOCUMENT_PROCESSOR",
+          "value": "sarvasahay-document-processor"
+        },
+        {
+          "name": "ML_MODEL_PATH",
+          "value": "ml/models/eligibility"
+        },
+        {
+          "name": "ML_ACCURACY_THRESHOLD",
+          "value": "0.89"
+        },
+        {
+          "name": "ML_MAX_EVALUATION_TIME",
+          "value": "5.0"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/database-url"
+        },
+        {
+          "name": "REDIS_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/redis-url"
+        },
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/secret-key"
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/encryption-key"
+        },
+        {
+          "name": "PM_KISAN_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/pm-kisan-api-key"
+        },
+        {
+          "name": "DBT_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:YOUR_ACCOUNT_ID:secret:sarvasahay/dbt-api-key"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/sarvasahay-app",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

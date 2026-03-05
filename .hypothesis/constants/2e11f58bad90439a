@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\services\auto_application_service.py
+# hypothesis_version: 6.151.9
+
+[0.5, 'Submission failed', 'applicationId', 'approvalProbability', 'approved', 'confidenceScore', 'createdAt', 'documentIds', 'draft', 'error', 'failed', 'fallbackMethod', 'formData', 'governmentRefNumber', 'governmentStatus', 'instructions', 'isValid', 'lastChecked', 'manual', 'message', 'paymentInfo', 'populatedAt', 'predictions', 'reason', 'referenceNumber', 'rejected', 'requiredDocuments', 'riskFactors', 'schemeId', 'schemeName', 'status', 'statusHistory', 'submission_failed', 'submitted', 'submittedAt', 'success', 'system', 'timestamp', 'trackedAt', 'under_review', 'updatedAt', 'userId']

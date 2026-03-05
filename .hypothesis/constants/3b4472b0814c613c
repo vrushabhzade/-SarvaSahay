@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\utils\error_handling.py
+# hypothesis_version: 6.151.9
+
+[0.5, 1.0, 2.0, 60.0, 'API_ERROR', 'An error occurred', 'DOC_ERROR', 'GENERIC_ERROR', 'TRACK_ERROR', 'api_timeout', 'api_unavailable', 'category', 'closed', 'code', 'connection', 'context', 'critical', 'data', 'data_validation', 'doc_poor_quality', 'doc_unreadable', 'en', 'error', 'fallback', 'fallbackAvailable', 'fallbackMethod', 'fallback_available', 'half_open', 'hi', 'high', 'low', 'medium', 'message', 'mr', 'network', 'network_error', 'none', 'open', 'payment_check_failed', 'performance', 'primary', 'primary_error', 'resource', 'retryPossible', 'security', 'service_degraded', 'severity', 'source', 'submission_failed', 'success', 'suggestedActions', 'system_integration', 'technicalDetails', 'timeout', 'timestamp', 'tracking_unavailable', 'user_input', 'validation', 'validation_failed']

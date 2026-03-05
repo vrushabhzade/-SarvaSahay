@@ -1,0 +1,286 @@
+Metadata-Version: 2.4
+Name: sarvasahay-platform
+Version: 0.1.0
+Summary: AI-powered government scheme eligibility and enrollment platform for rural Indian citizens
+Author-email: SarvaSahay Team <team@sarvasahay.gov.in>
+License: MIT
+Project-URL: Homepage, https://sarvasahay.gov.in
+Project-URL: Documentation, https://docs.sarvasahay.gov.in
+Project-URL: Repository, https://github.com/sarvasahay/platform
+Project-URL: Bug Tracker, https://github.com/sarvasahay/platform/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Government
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Government :: Benefits
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.104.0
+Requires-Dist: uvicorn[standard]>=0.24.0
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: sqlalchemy>=2.0.0
+Requires-Dist: alembic>=1.13.0
+Requires-Dist: xgboost>=2.0.0
+Requires-Dist: scikit-learn>=1.3.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: pytesseract>=0.3.10
+Requires-Dist: opencv-python>=4.8.0
+Requires-Dist: pillow>=10.0.0
+Requires-Dist: psycopg2-binary>=2.9.0
+Requires-Dist: redis>=5.0.0
+Requires-Dist: httpx>=0.25.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: structlog>=23.2.0
+Requires-Dist: prometheus-client>=0.19.0
+Requires-Dist: cryptography>=41.0.0
+Requires-Dist: passlib[bcrypt]>=1.7.4
+Requires-Dist: twilio>=8.10.0
+Requires-Dist: asyncio>=3.4.3
+Requires-Dist: aioredis>=2.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: pytest-xdist>=3.3.0; extra == "dev"
+Requires-Dist: pytest-mock>=3.12.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: pytest-html>=4.1.0; extra == "dev"
+Requires-Dist: hypothesis>=6.88.0; extra == "dev"
+Requires-Dist: locust>=2.17.0; extra == "dev"
+Requires-Dist: httpx>=0.25.0; extra == "dev"
+Requires-Dist: responses>=0.24.0; extra == "dev"
+Requires-Dist: openapi-spec-validator>=0.7.0; extra == "dev"
+Requires-Dist: black>=23.9.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: flake8>=6.1.0; extra == "dev"
+Requires-Dist: mypy>=1.6.0; extra == "dev"
+Requires-Dist: bandit>=1.7.5; extra == "dev"
+Requires-Dist: pre-commit>=3.5.0; extra == "dev"
+Requires-Dist: jupyter>=1.0.0; extra == "dev"
+Requires-Dist: ipython>=8.16.0; extra == "dev"
+Requires-Dist: mkdocs>=1.5.0; extra == "dev"
+Requires-Dist: mkdocs-material>=9.4.0; extra == "dev"
+Requires-Dist: mkdocstrings[python]>=0.24.0; extra == "dev"
+Requires-Dist: diagrams>=0.23.0; extra == "dev"
+Requires-Dist: graphviz>=0.20.0; extra == "dev"
+Provides-Extra: production
+Requires-Dist: gunicorn>=21.2.0; extra == "production"
+Requires-Dist: sentry-sdk[fastapi]>=1.38.0; extra == "production"
+Requires-Dist: newrelic>=9.2.0; extra == "production"
+Provides-Extra: ml
+Requires-Dist: optuna>=3.4.0; extra == "ml"
+Requires-Dist: mlflow>=2.7.0; extra == "ml"
+Requires-Dist: joblib>=1.3.0; extra == "ml"
+Requires-Dist: shap>=0.43.0; extra == "ml"
+
+# SarvaSahay Platform
+
+AI-powered government scheme eligibility and enrollment platform designed to bridge the information gap between rural Indian citizens and government benefits.
+
+## Overview
+
+SarvaSahay addresses the critical problem where eligible citizens miss ₹50,000-500,000 in annual benefits due to information barriers, complex eligibility rules, and bureaucratic friction. The platform uses machine learning to match user profiles against complex eligibility criteria, automates document processing and form submission, and provides real-time tracking of applications through government systems.
+
+## Core Value Proposition
+
+- **Instant Discovery**: AI-powered matching identifies all eligible government schemes within 5 seconds
+- **Automated Enrollment**: Auto-fills and submits government forms using user profile and document data
+- **Multi-Channel Access**: SMS, voice, web, and mobile interfaces for users with varying digital literacy
+- **Real-Time Tracking**: Monitors application status across government systems with proactive notifications
+
+## Key Metrics
+
+- 30+ government schemes supported
+- 1000+ eligibility rules processed
+- 89% AI model accuracy for eligibility matching
+- 99.5% uptime requirement during business hours
+- <5 second response time for eligibility evaluation
+
+## Technology Stack
+
+### AI/ML Stack
+- **XGBoost**: Extreme Gradient Boosting for eligibility matching (89% accuracy)
+- **Tesseract 5.0**: OCR engine with custom Indian language models
+- **OpenCV**: Image preprocessing for document enhancement
+- **NLP Processor**: Speech-to-text conversion for voice interface
+
+### Architecture
+- **Microservices Architecture**: Domain-driven design with event-driven communication
+- **API-First Design**: All services expose REST APIs with OpenAPI specifications
+- **Stateless Services**: Designed for horizontal scaling
+- **Event-Driven Communication**: Loose coupling between services via events
+
+## Installation
+
+### Development Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sarvasahay/platform.git
+   cd platform
+   ```
+
+2. **Install with uv (recommended)**
+   ```bash
+   # Install development dependencies
+   uv pip install -e ".[dev]"
+   
+   # Or install all optional dependencies
+   uv pip install -e ".[dev,ml,production]"
+   ```
+
+3. **Alternative: Install with pip**
+   ```bash
+   pip install -e ".[dev]"
+   ```
+
+### Production Setup
+
+```bash
+# Install production dependencies
+uv pip install -e ".[production]"
+```
+
+## Development
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run specific test categories
+pytest tests/unit/          # Unit tests
+pytest tests/property/      # Property-based tests (Hypothesis)
+pytest tests/integration/   # Integration tests
+pytest tests/load/          # Load tests
+
+# Run with coverage
+pytest --cov=services --cov-report=html
+
+# Use the test runner script
+./run_tests.sh              # Linux/Mac
+run_tests.bat               # Windows
+```
+
+### Code Quality
+
+```bash
+# Format code
+black .
+isort .
+
+# Lint code
+flake8 .
+mypy .
+
+# Security scan
+bandit -r services/
+
+# Run all quality checks
+pre-commit run --all-files
+```
+
+### Performance Requirements
+
+- **Eligibility evaluation**: <5 seconds for 30+ schemes
+- **Model inference**: <1 second response time
+- **System uptime**: 99.5% during business hours
+- **Concurrent users**: 1,000+ users, 10,000+ simultaneous evaluations
+
+## Project Structure
+
+```
+├── services/                # Core microservices
+│   ├── profile-service/     # User profile management
+│   ├── eligibility-engine/  # AI-powered scheme matching
+│   ├── document-processor/  # OCR and document validation
+│   ├── auto-application/    # Form filling and submission
+│   ├── tracking-service/    # Application status monitoring
+│   └── notification-service/# Multi-channel communications
+├── shared/                  # Shared components
+│   ├── models/             # Data models and schemas
+│   ├── utils/              # Common utilities
+│   ├── config/             # Configuration management
+│   └── middleware/         # API middleware components
+├── ml/                     # AI/ML components
+│   ├── models/             # XGBoost eligibility models
+│   ├── training/           # Model training scripts
+│   ├── data/               # Training and validation datasets
+│   └── pipelines/          # ML deployment pipelines
+├── api/                    # API layer
+│   ├── gateway/            # API Gateway configuration
+│   ├── specs/              # OpenAPI 3.0 specifications
+│   └── docs/               # API documentation
+├── tests/                  # Testing suite
+│   ├── unit/               # Unit tests by service
+│   ├── integration/        # Cross-service integration tests
+│   ├── property/           # Property-based tests (Hypothesis)
+│   ├── load/               # Performance and load tests
+│   └── e2e/                # End-to-end user journey tests
+└── infrastructure/         # Infrastructure & DevOps
+    ├── docker/             # Container configurations
+    ├── kubernetes/         # K8s deployment manifests
+    └── terraform/          # Infrastructure as code
+```
+
+## API Documentation
+
+The platform exposes REST APIs with OpenAPI 3.0 specifications:
+
+- **Profile Service**: `/api/v1/profiles` - User profile management
+- **Eligibility Engine**: `/api/v1/eligibility` - Scheme matching and evaluation
+- **Document Processor**: `/api/v1/documents` - OCR and document validation
+- **Auto-Application**: `/api/v1/applications` - Form submission automation
+- **Tracking Service**: `/api/v1/tracking` - Application status monitoring
+
+## Government Integration
+
+The platform integrates with official government APIs:
+
+- **PM-KISAN**: Direct integration with farmer registration API
+- **DBT System**: Integration with Direct Benefit Transfer portal
+- **PFMS**: Public Financial Management System for payment tracking
+- **State APIs**: Maharashtra, Karnataka, Tamil Nadu government portals
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes following the coding standards
+4. Run tests and ensure coverage (`pytest --cov=services`)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Development Standards
+
+- **Testing**: Minimum 90% code coverage required
+- **Property-Based Testing**: Use Hypothesis framework with 100+ iterations
+- **Performance**: All eligibility evaluations must complete within 5 seconds
+- **Security**: All personal data must be encrypted at rest and in transit
+- **Documentation**: All public APIs must have OpenAPI specifications
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- **Documentation**: https://docs.sarvasahay.gov.in
+- **Issues**: https://github.com/sarvasahay/platform/issues
+- **Email**: support@sarvasahay.gov.in
+
+## Acknowledgments
+
+- Government of India for policy support
+- Rural communities for feedback and testing
+- Open source AI/ML community for foundational tools

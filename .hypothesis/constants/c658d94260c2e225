@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\services\voice_interface.py
+# hypothesis_version: 6.151.9
+
+[b'[Mock audio data - integrate with TTS API]', 'action', 'application_status', 'bengali', 'bn-IN', 'call_id', 'continue', 'created_at', 'en-IN', 'end', 'english', 'error', 'goodbye', 'gu-IN', 'gujarati', 'hi-IN', 'hindi', 'initial', 'kannada', 'kn-IN', 'language', 'language_selection', 'main_menu', 'marathi', 'mr-IN', 'no_input', 'phone_number', 'profile_creation', 'response_audio_url', 'response_text', 'scheme_discovery', 'service_unavailable', 'state', 'ta-IN', 'tamil', 'te-IN', 'telugu', 'timestamp', 'welcome']

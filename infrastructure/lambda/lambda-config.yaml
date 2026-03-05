@@ -1,0 +1,207 @@
+# AWS Lambda Configuration for SarvaSahay Platform
+# This file defines Lambda functions for serverless processing
+
+functions:
+  # Eligibility Engine Lambda
+  eligibility-engine:
+    name: sarvasahay-eligibility-engine
+    runtime: python3.11
+    handler: lambda_function.lambda_handler
+    memory: 3008  # MB - Required for XGBoost model inference
+    timeout: 300  # seconds - 5 minutes for complex evaluations
+    environment:
+      ML_MODEL_PATH: /opt/ml/models/eligibility
+      ML_ACCURACY_THRESHOLD: "0.89"
+      ML_MAX_EVALUATION_TIME: "5.0"
+    layers:
+      - arn:aws:lambda:ap-south-1:ACCOUNT_ID:layer:xgboost-layer:1
+      - arn:aws:lambda:ap-south-1:ACCOUNT_ID:layer:numpy-pandas-layer:1
+    role: arn:aws:iam::ACCOUNT_ID:role/sarvasahay-eligibility-lambda-role
+    vpc_config:
+      subnet_ids:
+        - subnet-xxxxx
+        - subnet-yyyyy
+      security_group_ids:
+        - sg-xxxxx
+    tags:
+      Service: eligibility-engine
+      Environment: production
+      Project: sarvasahay
+
+  # Document Processor Lambda
+  document-processor:
+    name: sarvasahay-document-processor
+    runtime: python3.11
+    handler: lambda_function.lambda_handler
+    memory: 2048  # MB
+    timeout: 180  # seconds - 3 minutes for document processing
+    environment:
+      AWS_S3_BUCKET_DOCUMENTS: sarvasahay-documents
+      AWS_TEXTRACT_ENABLED: "true"
+      AWS_REKOGNITION_ENABLED: "true"
+    layers:
+      - arn:aws:lambda:ap-south-1:ACCOUNT_ID:layer:opencv-layer:1
+      - arn:aws:lambda:ap-south-1:ACCOUNT_ID:layer:pillow-layer:1
+    role: arn:aws:iam::ACCOUNT_ID:role/sarvasahay-document-lambda-role
+    tags:
+      Service: document-processor
+      Environment: production
+      Project: sarvasahay
+
+  # OCR Processor Lambda
+  ocr-processor:
+    name: sarvasahay-ocr-processor
+    runtime: python3.11
+    handler: lambda_function.lambda_handler
+    memory: 1536  # MB
+    timeout: 120  # seconds - 2 minutes for OCR
+    environment:
+      AWS_TEXTRACT_MAX_PAGES: "10"
+      AWS_REKOGNITION_MIN_CONFIDENCE: "80"
+    role: arn:aws:iam::ACCOUNT_ID:role/sarvasahay-ocr-lambda-role
+    tags:
+      Service: ocr-processor
+      Environment: production
+      Project: sarvasahay
+
+  # Notification Handler Lambda
+  notification-handler:
+    name: sarvasahay-notification-handler
+    runtime: python3.11
+    handler: lambda_function.lambda_handler
+    memory: 512  # MB
+    timeout: 60  # seconds - 1 minute for notifications
+    environment:
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      AWS_SNS_TOPIC_ALERTS: arn:aws:sns:ap-south-1:ACCOUNT_ID:sarvasahay-alerts
+    role: arn:aws:iam::ACCOUNT_ID:role/sarvasahay-notification-lambda-role
+    tags:
+      Service: notification-handler
+      Environment: production
+      Project: sarvasahay
+
+  # Tracking Updater Lambda
+  tracking-updater:
+    name: sarvasahay-tracking-updater
+    runtime: python3.11
+    handler: lambda_function.lambda_handler
+    memory: 1024  # MB
+    timeout: 180  # seconds - 3 minutes for tracking updates
+    environment:
+      PM_KISAN_API_URL: https://api.pmkisan.gov.in
+      DBT_API_URL: https://api.dbt.gov.in
+      PFMS_API_URL: https://api.pfms.gov.in
+      GOV_API_TIMEOUT: "30"
+    role: arn:aws:iam::ACCOUNT_ID:role/sarvasahay-tracking-lambda-role
+    tags:
+      Service: tracking-updater
+      Environment: production
+      Project: sarvasahay
+
+# Lambda Layers Configuration
+layers:
+  xgboost-layer:
+    name: sarvasahay-xgboost-layer
+    description: XGBoost library for eligibility matching
+    compatible_runtimes:
+      - python3.11
+    content: layers/xgboost/
+
+  opencv-layer:
+    name: sarvasahay-opencv-layer
+    description: OpenCV for image preprocessing
+    compatible_runtimes:
+      - python3.11
+    content: layers/opencv/
+
+  numpy-pandas-layer:
+    name: sarvasahay-numpy-pandas-layer
+    description: NumPy and Pandas for data processing
+    compatible_runtimes:
+      - python3.11
+    content: layers/numpy-pandas/
+
+  pillow-layer:
+    name: sarvasahay-pillow-layer
+    description: Pillow for image manipulation
+    compatible_runtimes:
+      - python3.11
+    content: layers/pillow/
+
+# API Gateway Configuration
+api_gateway:
+  name: sarvasahay-api
+  stage: prod
+  region: ap-south-1
+  endpoints:
+    - path: /eligibility/evaluate
+      method: POST
+      integration: eligibility-engine
+      authorization: AWS_IAM
+    
+    - path: /documents/process
+      method: POST
+      integration: document-processor
+      authorization: AWS_IAM
+    
+    - path: /documents/ocr
+      method: POST
+      integration: ocr-processor
+      authorization: AWS_IAM
+    
+    - path: /notifications/send
+      method: POST
+      integration: notification-handler
+      authorization: AWS_IAM
+    
+    - path: /tracking/update
+      method: POST
+      integration: tracking-updater
+      authorization: AWS_IAM
+
+# Event Sources Configuration
+event_sources:
+  # SQS trigger for document processing
+  document-queue:
+    type: sqs
+    queue: sarvasahay-documents
+    function: document-processor
+    batch_size: 10
+    
+  # SQS trigger for eligibility evaluation
+  eligibility-queue:
+    type: sqs
+    queue: sarvasahay-eligibility
+    function: eligibility-engine
+    batch_size: 5
+    
+  # SQS trigger for notifications
+  notification-queue:
+    type: sqs
+    queue: sarvasahay-notifications
+    function: notification-handler
+    batch_size: 10
+
+# CloudWatch Alarms
+alarms:
+  eligibility-engine-errors:
+    function: eligibility-engine
+    metric: Errors
+    threshold: 10
+    period: 300
+    evaluation_periods: 1
+    
+  eligibility-engine-duration:
+    function: eligibility-engine
+    metric: Duration
+    threshold: 5000  # 5 seconds requirement
+    period: 60
+    evaluation_periods: 2
+    
+  document-processor-throttles:
+    function: document-processor
+    metric: Throttles
+    threshold: 5
+    period: 300
+    evaluation_periods: 1

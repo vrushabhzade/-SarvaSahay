@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\scaling\__init__.py
+# hypothesis_version: 6.151.9
+
+['AutoScaler', 'HealthCheckConfig', 'LoadBalancerConfig', 'ScalingPolicy', 'StatelessService', 'get_autoscaler', 'get_session_manager']

@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\scaling\load_balancer.py
+# hypothesis_version: 6.151.9
+
+[1000, 8000, '/api/v1/health', 'Enable health checks', 'Health check timeout', 'SARVASAHAY_SESSION', 'Server port', 'ip_hash', 'ip_hash;', 'least_conn;', 'least_connections', 'least_response_time', 'leastconn', 'localhost', 'round_robin', 'roundrobin', 'weighted_round_robin', '}\n\n']

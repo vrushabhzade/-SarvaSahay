@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\utils\gdpr_compliance.py
+# hypothesis_version: 6.151.9
+
+[100, 365, 86400, '[REDACTED]', 'aadhaar', 'access', 'address', 'analytics', 'applications', 'audit_logs', 'bank_account', 'completed', 'compliance_rate', 'consents', 'csv', 'data', 'data_processing', 'data_sources', 'data_to_delete', 'documents', 'email', 'end_date', 'erasure', 'generated_at', 'grace_period_days', 'in_progress', 'json', 'marketing', 'metadata', 'name', 'objection', 'overdue_requests', 'pan', 'pending', 'pending_requests', 'phone', 'phone_number', 'portability', 'profiling', 'rectification', 'rejected', 'report_period', 'request_id', 'request_type_counts', 'restriction', 'retention_exceptions', 'scheduled', 'start_date', 'status', 'status_counts', 'third_party_sharing', 'total_records', 'total_requests', 'user_id', 'user_profile', 'voter_id']

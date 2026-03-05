@@ -1,0 +1,4 @@
+[console_scripts]
+sarvasahay-migrate = sarvasahay.database:migrate
+sarvasahay-server = sarvasahay.main:main
+sarvasahay-worker = sarvasahay.worker:main

@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\models\__init__.py
+# hypothesis_version: 6.151.9
+
+['Application', 'ApplicationCreate', 'ApplicationPriority', 'ApplicationResponse', 'ApplicationStatus', 'ApplicationSummary', 'ApplicationUpdate', 'Caste', 'CommunicationChannel', 'Demographics', 'Documents', 'Economic', 'EligibilityCategory', 'EligibilityCriteria', 'EligibilityResult', 'EmploymentStatus', 'Family', 'Gender', 'GovernmentScheme', 'Language', 'Location', 'MaritalStatus', 'NumericCriteria', 'PaymentDetails', 'PaymentStatus', 'Preferences', 'SchemeStatus', 'SchemeType', 'StatusHistory', 'UserProfile', 'UserProfileCreate', 'UserProfileResponse', 'UserProfileUpdate']

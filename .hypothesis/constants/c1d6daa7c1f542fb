@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\services\rule_engine.py
+# hypothesis_version: 6.151.9
+
+[0.0, 0.5, 0.7, 1.5, 999, 50000, '.', 'Scheme is not active', 'age', 'agriculture', 'approvalProbability', 'benefitAmount', 'category', 'demographics', 'economic', 'eligibilityScore', 'employmentStatus', 'failedRules', 'farmer', 'monthly', 'one_time', 'priority', 'recommendations', 'schemes', 'totalAnnualBenefit', 'totalEligibleSchemes', 'yearly']

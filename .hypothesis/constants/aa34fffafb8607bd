@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\scaling\autoscaler.py
+# hypothesis_version: 6.151.9
+
+[30.0, 70.0, 200.0, 800.0, -100, 100, 300, 600, 'Enable this policy', 'Metric to monitor', 'Policy name', 'action', 'concurrent_users', 'cpu_based_scaling', 'cpu_utilization', 'current_instances', 'current_value', 'direction', 'down', 'error_rate', 'in_cooldown', 'instances_after', 'instances_before', 'memory_utilization', 'metric', 'metric_value', 'none', 'policy', 'reason', 'recommendations', 'request_count', 'response_time', 'threshold', 'timestamp', 'up']

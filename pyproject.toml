@@ -1,0 +1,266 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sarvasahay-platform"
+version = "0.1.0"
+description = "AI-powered government scheme eligibility and enrollment platform for rural Indian citizens"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "SarvaSahay Team", email = "team@sarvasahay.gov.in"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Government",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Government :: Benefits",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    # Core dependencies
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.5.0",
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.13.0",
+    
+    # AI/ML Stack (89% accuracy requirement)
+    "xgboost>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    
+    # OCR and Document Processing
+    "pytesseract>=0.3.10",
+    "opencv-python>=4.8.0",
+    "pillow>=10.0.0",
+    
+    # Database and Caching
+    "psycopg2-binary>=2.9.0",  # PostgreSQL
+    "redis>=5.0.0",
+    
+    # HTTP Client for Government APIs
+    "httpx>=0.25.0",
+    "requests>=2.31.0",
+    
+    # Configuration and Environment
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.0",
+    
+    # Logging and Monitoring
+    "structlog>=23.2.0",
+    "prometheus-client>=0.19.0",
+    
+    # Security and Encryption
+    "cryptography>=41.0.0",
+    "passlib[bcrypt]>=1.7.4",
+    
+    # SMS and Voice Integration
+    "twilio>=8.10.0",
+    
+    # Async Support
+    "asyncio>=3.4.3",
+    "aioredis>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Testing Framework (Property-based testing requirement)
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-xdist>=3.3.0",
+    "pytest-mock>=3.12.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-html>=4.1.0",
+    "hypothesis>=6.88.0",  # 100+ iterations requirement
+    
+    # Load Testing (1,000+ concurrent users requirement)
+    "locust>=2.17.0",
+    
+    # API Testing and Documentation
+    "httpx>=0.25.0",
+    "responses>=0.24.0",
+    "openapi-spec-validator>=0.7.0",
+    
+    # Code Quality and Formatting
+    "black>=23.9.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.6.0",
+    "bandit>=1.7.5",  # Security scanning
+    
+    # Development Tools
+    "pre-commit>=3.5.0",
+    "jupyter>=1.0.0",
+    "ipython>=8.16.0",
+    
+    # Documentation
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocstrings[python]>=0.24.0",
+    
+    # Diagram Generation
+    "diagrams>=0.23.0",
+    "graphviz>=0.20.0",
+]
+
+production = [
+    # Production-specific dependencies
+    "gunicorn>=21.2.0",
+    "sentry-sdk[fastapi]>=1.38.0",
+    "newrelic>=9.2.0",
+]
+
+ml = [
+    # Additional ML dependencies for model training
+    "optuna>=3.4.0",  # Hyperparameter optimization
+    "mlflow>=2.7.0",  # ML experiment tracking
+    "joblib>=1.3.0",  # Model serialization
+    "shap>=0.43.0",   # Model explainability
+]
+
+[project.urls]
+Homepage = "https://sarvasahay.gov.in"
+Documentation = "https://docs.sarvasahay.gov.in"
+Repository = "https://github.com/sarvasahay/platform"
+"Bug Tracker" = "https://github.com/sarvasahay/platform/issues"
+
+[project.scripts]
+sarvasahay-server = "sarvasahay.main:main"
+sarvasahay-worker = "sarvasahay.worker:main"
+sarvasahay-migrate = "sarvasahay.database:migrate"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["services*", "shared*", "api*", "ml*"]
+exclude = ["tests*", "docs*", "scripts*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--cov=services",
+    "--cov=shared",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-fail-under=90",  # 90% coverage requirement
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests with external systems",
+    "property: Property-based tests using Hypothesis",
+    "load: Load and performance tests",
+    "e2e: End-to-end tests",
+    "slow: Slow running tests",
+]
+
+[tool.coverage.run]
+source = ["services", "shared", "api", "ml"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+    "*/venv/*",
+    "*/env/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "xgboost.*",
+    "cv2.*",
+    "pytesseract.*",
+    "twilio.*",
+]
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv", "env"]
+skips = ["B101", "B601"]  # Skip assert_used and shell_injection_process
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs/source/conf.py",
+    "old",
+    "build",
+    "dist",
+    ".venv",
+    "venv",
+    ".env",
+    "env",
+]

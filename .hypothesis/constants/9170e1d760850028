@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\cache\redis_client.py
+# hypothesis_version: 6.151.9
+
+[3600, 86400, '0', 'connected_clients', 'hit_rate', 'keyspace_hits', 'keyspace_misses', 'scheme:*', 'schemes:all', 'total_keys', 'used_memory', 'used_memory_human']

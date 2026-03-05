@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\Kiro\Rural Ai prototype\services\eligibility_engine.py
+# hypothesis_version: 6.148.7
+
+[0.1, 0.7, 0.8, 0.89, 0.9, 1.0, 5.0, 150, 'Conditional', 'Definitely Eligible', 'Likely Eligible', 'age', 'annualIncome', 'benefitAmount', 'category', 'demographics', 'economic', 'eligibilityCriteria', 'eligibilityScore', 'employmentStatus', 'inf', 'landOwnership', 'max', 'min', 'name', 'schemeId']

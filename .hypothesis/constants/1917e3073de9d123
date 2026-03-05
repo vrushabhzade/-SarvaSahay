@@ -1,0 +1,4 @@
+# file: C:\Users\VRUSHABH\OneDrive\Music\Desktop\KIRO PROJECT\Rural Ai prototype\shared\utils\auth.py
+# hypothesis_version: 6.151.9
+
+[900, 3600, 100000, 'AUTH_SECRET_KEY', 'Admin user not found', 'HS256', 'Invalid MFA code', 'Invalid session', 'Invalid token', 'SarvaSahay', 'Session has expired', 'Token has expired', 'User not found', 'admin', 'count', 'created_at', 'email', 'exp', 'expires_at', 'expires_in', 'first_attempt', 'iat', 'is_locked', 'last_login', 'message', 'mfa_enabled', 'mfa_method', 'mfa_required', 'mfa_secret', 'operator', 'password_hash', 'phone', 'readonly', 'role', 'salt', 'session_id', 'sha256', 'sms', 'status', 'success', 'token', 'totp', 'user', 'username', 'utf-8']
