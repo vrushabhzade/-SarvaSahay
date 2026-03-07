@@ -127,3 +127,53 @@ data/
 # Local configuration
 local_settings.py
 config.local.yml
+
+# Documentation/Guide files (exclude from repo)
+AWS_CONFIGURATION_COMPLETE.md
+AWS_DEPLOYMENT_COMPLETE.md
+AWS_DEPLOYMENT_QUICKSTART.md
+AWS_DEPLOYMENT_STEP_BY_STEP.md
+AWS_FULL_DEPLOYMENT_GUIDE.md
+AWS_SETUP_GUIDE.md
+CURRENT_STATUS.md
+DEPLOY_AWS_QUICKSTART.md
+DEPLOY_PRODUCTION_ARCHITECTURE.md
+DEPLOYMENT_GUIDE.md
+DOCKER_CONNECTION_GUIDE.md
+FRONTEND_BACKEND_ARCHITECTURE.md
+FRONTEND_COMPLETE.md
+FRONTEND_FIX_COMPLETE.md
+FRONTEND_READY.md
+FRONTEND_STATUS_FINAL.md
+GITHUB_PUSH_COMPLETE.md
+HOW_TO_RUN_SARVASAHAY.md
+HOW_TO_UPDATE_AWS_ENDPOINTS.md
+LOCAL_TEST_REPORT.md
+PLATFORM_STARTED.md
+QUICK_AWS_ENDPOINT_UPDATE.md
+QUICK_START.md
+SARVASAHAY_DEMO.md
+SERVER_RUNNING.md
+START_SARVASAHAY_FRONTEND.md
+SYSTEM_VALIDATION_REPORT.md
+TRADELINK_VS_SARVASAHAY_FIX.md
+TROUBLESHOOTING.md
+frontend/FRONTEND_SETUP_COMPLETE.md
+frontend/START_FRONTEND.md
+frontend/web-app/FIX_INSTRUCTIONS.md
+infrastructure/SCALING_GUIDE.md
+infrastructure/aws/ecs-deployment.md
+
+# Temporary/test files
+api_endpoints.json
+api_interface.html
+test_local_app.py
+diagnose.py
+
+# Startup scripts (local use only)
+start-frontend.ps1
+start-sarvasahay-frontend-now.ps1
+start-sarvasahay.ps1
+deploy-to-aws-complete.ps1
+frontend/fix-and-start.ps1
+frontend/setup-frontend.ps1
