@@ -27,8 +27,16 @@
 name: Deploy SarvaSahay to AWS 
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:  # Manual trigger only
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
 
 env:
   AWS_REGION: ap-south-1                      # Mumbai region for India

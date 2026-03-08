@@ -1,0 +1,63 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./infrastructure/docker/Dockerfile
+        push: false
+        tags: sarvasahay-app:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Test Docker image
+      run: |
+        docker images
+        echo "✅ Docker image built successfully!"
+
+  frontend-build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/web-app/package-lock.json
+
+    - name: Install dependencies
+      working-directory: frontend/web-app
+      run: npm ci --legacy-peer-deps
+
+    - name: Build frontend
+      working-directory: frontend/web-app
+      run: npm run build
+
+    - name: Test build output
+      working-directory: frontend/web-app
+      run: |
+        ls -la build/
+        echo "✅ Frontend built successfully!"
